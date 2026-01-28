@@ -1,0 +1,13 @@
+input, select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  border: none;
+  background: #020617;
+  color: var(--text);
+}
+
+label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
