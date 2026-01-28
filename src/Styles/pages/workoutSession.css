@@ -1,0 +1,32 @@
+.workout-session {
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.exercise-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exercise-card {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+.inputs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.inputs input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: none;
+  background: #1e293b;
+  color: var(--text);
+}

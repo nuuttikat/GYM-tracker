@@ -12,7 +12,7 @@ src/
 ├─ components/
 │   ├─ Sidebar.jsx
 │   ├─ WorkoutCard.jsx
-│   ├─ ExerciseRow.jsx
+│   ├─ ExerciseRow.jsxs
 │   ├─ SetInput.jsx
 │   ├─ Modal.jsx
 │   └─ ProgressBar.jsx
@@ -37,3 +37,26 @@ src/
 
 tulevat päivitykset 
 	Database firebase
+
+
+    {
+  id: crypto.randomUUID(),
+  name: "Push Day",
+  exercises: []
+}
+
+{
+  id: crypto.randomUUID(),
+  name: "Bench Press",
+  sets: 3,
+  reps: 8,
+  weight: 80
+}
+
+
+{
+  id: crypto.randomUUID(),
+  programId,
+  date: new Date().toISOString(),
+  exercises: []
+}

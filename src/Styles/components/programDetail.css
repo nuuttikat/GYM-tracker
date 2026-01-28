@@ -1,0 +1,22 @@
+.program-detail {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: var(--radius);
+}
+
+.program-detail h2 {
+  margin-bottom: 1rem;
+}
+
+.program-detail .exercise-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) 120px;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

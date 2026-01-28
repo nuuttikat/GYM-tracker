@@ -1,0 +1,40 @@
+.programs-page {
+  max-width: 900px;
+  margin: 0 auto;
+  height: auto;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.add-program {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.add-program input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: none;
+  background: #1e293b;
+  color: var(--text);
+}
+
+.program-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.program-card h3 {
+  margin-bottom: 0.5rem;
+}
+
+.program-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
