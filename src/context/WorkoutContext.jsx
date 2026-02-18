@@ -7,12 +7,32 @@ export function WorkoutProvider({ children }) {
   const [programs, setPrograms] = useLocalStorage("programs", []);
   const [sessions, setSessions] = useLocalStorage("sessions", []);
 
-  // Lisää ohjelma
+  // 👤 PROFIILI
+  const [profile, setProfile] = useLocalStorage("profile", {
+    name: "",
+    weight: "",
+    height: "",
+  });
+
+  // ⚖️ PAINOHISTORIA
+  const [weightHistory, setWeightHistory] = useLocalStorage("weightHistory", []);
+
+  // ➕ lisää painomerkintä
+  const addWeightEntry = (weight) => {
+    setWeightHistory((prev) => [
+      ...prev,
+      {
+        date: new Date().toISOString().split("T")[0],
+        weight: Number(weight),
+      },
+    ]);
+  };
+
+  // 📋 Ohjelmat
   const addProgram = (program) => {
     setPrograms([...programs, program]);
   };
 
-  // Lisää liike ohjelmaan
   const addExerciseToProgram = (programId, exercise) => {
     setPrograms(
       programs.map((p) =>
@@ -23,14 +43,30 @@ export function WorkoutProvider({ children }) {
     );
   };
 
-  // Tallentaa treenikerran
+  // 🏋️‍♂️ Treeni
   const saveSession = (session) => {
     setSessions([...sessions, session]);
   };
 
   return (
     <WorkoutContext.Provider
-      value={{ programs, sessions, addProgram, addExerciseToProgram, saveSession }}
+      value={{
+        programs,
+        sessions,
+
+        // profiili
+        profile,
+        setProfile,
+
+        // paino
+        weightHistory,
+        addWeightEntry,
+
+        // treenit
+        addProgram,
+        addExerciseToProgram,
+        saveSession,
+      }}
     >
       {children}
     </WorkoutContext.Provider>

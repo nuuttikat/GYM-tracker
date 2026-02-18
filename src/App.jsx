@@ -6,12 +6,16 @@ import Dashboard from "./pages/Dashboard";
 import Programs from "./pages/Programs";
 import WorkoutSession from "./pages/WorkoutSession";
 import History from "./pages/History";
+import Profile from "./pages/Profile";
+
 
 function App() {
   const [page, setPage] = useState("dashboard");
 
   const renderPage = () => {
     switch (page) {
+      case "profile":
+        return <Profile />;
       case "programs":
         return <Programs />;
       case "workout":

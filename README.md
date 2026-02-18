@@ -15,7 +15,9 @@ src/
 │   ├─ ExerciseRow.jsxs
 │   ├─ SetInput.jsx
 │   ├─ Modal.jsx
-│   └─ ProgressBar.jsx
+│   ├─ ProgressBar.jsx
+│   ├─ Nav.jsx
+│   └─ WorkoutContext.jsx
 │
 ├─ pages/
 │   ├─ Dashboard.jsx
@@ -31,6 +33,25 @@ src/
 │
 ├─ data/
 │   └─ seedPrograms.js
+│
+├─ Styles/
+│   ├─ Sidebar.jsx
+│   ├─ WorkoutCard.jsx
+│   ├─ ExerciseRow.jsxs
+│   ├─ SetInput.jsx
+│   ├─ Modal.jsx
+│   ├─ ProgressBar.jsx
+│   ├─ Nav.jsx
+│   ├─ WorkoutContext.jsx
+│   ├─ components/
+│   │           ├─ Nav.jsx
+│   │           └─ WorkoutContext.jsx
+│   ├─ components/
+│               ├─ ProgressBar.jsx
+│               ├─ Nav.jsx
+│               └─ WorkoutContext.jsx
+│
+│
 │
 ├─ App.jsx
 └─ main.jsx

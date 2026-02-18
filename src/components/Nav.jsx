@@ -23,6 +23,13 @@ export default function Nav({ currentPage, setPage }) {
         >
           History
         </button>
+        <button
+           className={currentPage === "profile" ? "nav-button active" : "nav-button"}
+           onClick={() => setPage("profile")}
+        >
+        Profile
+        </button>
+
       </div>
     </nav>
   );

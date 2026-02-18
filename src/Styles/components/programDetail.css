@@ -1,22 +1,35 @@
 .program-detail {
-  background: var(--card);
-  padding: 1rem;
-  border-radius: var(--radius);
+  padding: 20px;
 }
 
-.program-detail h2 {
-  margin-bottom: 1rem;
+.exercise-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-.program-detail .exercise-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) 120px;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+.exercise-form input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100px;
+  text-align: center;
+}
+
+.exercise-form button {
+  padding: 6px 12px;
 }
 
 .exercise-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
+}
+
+.exercise-card {
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  font-weight: 500;
 }

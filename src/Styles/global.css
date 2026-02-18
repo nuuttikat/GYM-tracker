@@ -6,7 +6,9 @@
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--bg);
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/image.png");
+
+  
   color: var(--text);
 }
 

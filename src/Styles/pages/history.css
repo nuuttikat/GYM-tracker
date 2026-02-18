@@ -28,3 +28,13 @@
   border-radius: var(--radius);
   font-size: 0.9rem;
 }
+
+.stats-summary {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
