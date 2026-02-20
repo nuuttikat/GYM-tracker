@@ -7,77 +7,47 @@ Simppeli salilla käymisen seurramis ohjelma.
 		kortit
 
 
-Rakenne
-src/
-├─ components/
-│   ├─ Sidebar.jsx
-│   ├─ WorkoutCard.jsx
-│   ├─ ExerciseRow.jsxs
-│   ├─ SetInput.jsx
-│   ├─ Modal.jsx
-│   ├─ ProgressBar.jsx
-│   ├─ Nav.jsx
-│   └─ WorkoutContext.jsx
+├───public
+│       image.jpg
+│       image.png
+│       vite.svg
 │
-├─ pages/
-│   ├─ Dashboard.jsx
-│   ├─ Programs.jsx
-│   ├─ WorkoutSession.jsx
-│   └─ History.jsx
-│
-├─ context/
-│   └─ WorkoutContext.jsx
-│
-├─ hooks/
-│   └─ useLocalStorage.js
-│
-├─ data/
-│   └─ seedPrograms.js
-│
-├─ Styles/
-│   ├─ Sidebar.jsx
-│   ├─ WorkoutCard.jsx
-│   ├─ ExerciseRow.jsxs
-│   ├─ SetInput.jsx
-│   ├─ Modal.jsx
-│   ├─ ProgressBar.jsx
-│   ├─ Nav.jsx
-│   ├─ WorkoutContext.jsx
-│   ├─ components/
-│   │           ├─ Nav.jsx
-│   │           └─ WorkoutContext.jsx
-│   ├─ components/
-│               ├─ ProgressBar.jsx
-│               ├─ Nav.jsx
-│               └─ WorkoutContext.jsx
-│
-│
-│
-├─ App.jsx
-└─ main.jsx
-
-tulevat päivitykset 
-	Database firebase
-
-
-    {
-  id: crypto.randomUUID(),
-  name: "Push Day",
-  exercises: []
-}
-
-{
-  id: crypto.randomUUID(),
-  name: "Bench Press",
-  sets: 3,
-  reps: 8,
-  weight: 80
-}
-
-
-{
-  id: crypto.randomUUID(),
-  programId,
-  date: new Date().toISOString(),
-  exercises: []
-}
+└───src
+    │   App.jsx
+    │   main.jsx
+    │
+    ├───components
+    │       Nav.jsx
+    │       ProgramDetail.jsx
+    │       WorkoutTimer.jsx
+    │
+    ├───context
+    │       WorkoutContext.jsx
+    │
+    ├───hooks
+    │       useLocalStorage.js
+    │
+    ├───pages
+    │       Dashboard.jsx
+    │       History.jsx
+    │       Profile.jsx
+    │       Programs.jsx
+    │       WorkoutSession.jsx
+    │
+    └───Styles
+        │   buttons.css
+        │   forms.css
+        │   global.css
+        │   layout.css
+        │   variables.css
+        │
+        ├───components
+        │       nav.css
+        │       programDetail.css
+        │
+        └───pages
+                dashboard.css
+                history.css
+                profile.css
+                programs.css
+                workoutSession.css

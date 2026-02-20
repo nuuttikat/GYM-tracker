@@ -7,14 +7,14 @@ export function WorkoutProvider({ children }) {
   const [programs, setPrograms] = useLocalStorage("programs", []);
   const [sessions, setSessions] = useLocalStorage("sessions", []);
 
-  // 👤 PROFIILI
+  // PROFIILI
   const [profile, setProfile] = useLocalStorage("profile", {
     name: "",
     weight: "",
     height: "",
   });
 
-  // ⚖️ PAINOHISTORIA
+  //  PAINOHISTORIA
   const [weightHistory, setWeightHistory] = useLocalStorage("weightHistory", []);
 
   // ➕ lisää painomerkintä
@@ -28,7 +28,7 @@ export function WorkoutProvider({ children }) {
     ]);
   };
 
-  // 📋 Ohjelmat
+  //  Ohjelmat
   const addProgram = (program) => {
     setPrograms([...programs, program]);
   };
@@ -43,7 +43,7 @@ export function WorkoutProvider({ children }) {
     );
   };
 
-  // 🏋️‍♂️ Treeni
+  //  Treeni
   const saveSession = (session) => {
     setSessions([...sessions, session]);
   };

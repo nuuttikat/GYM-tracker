@@ -9,7 +9,7 @@ export default function WorkoutTimer({
   const [restRemaining, setRestRemaining] = useState(0);
   const [isRestRunning, setIsRestRunning] = useState(false);
 
-  // 🏋️ treeniaika (auto)
+  //  treeniaika (auto)
   useEffect(() => {
     if (!isSessionRunning) return;
 
@@ -20,7 +20,7 @@ export default function WorkoutTimer({
     return () => clearInterval(interval);
   }, [isSessionRunning]);
 
-  // 😴 lepo countdown
+  //  lepo countdown
   useEffect(() => {
     if (!isRestRunning) return;
 
