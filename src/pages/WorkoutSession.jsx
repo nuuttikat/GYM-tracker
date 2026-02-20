@@ -1,44 +1,70 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { useWorkout } from "../context/WorkoutContext";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import "../styles/pages/workoutSession.css";
 import WorkoutTimer from "../components/WorkoutTimer";
+
+const INITIAL_DRAFT = {
+  selectedProgramId: "",
+  exerciseLogs: {},
+  sessionSeconds: 0,
+  isSessionRunning: true,
+};
 
 export default function WorkoutSession({ goBack }) {
   const { programs, saveSession } = useWorkout();
 
-  const [selectedProgramId, setSelectedProgramId] = useState("");
-  const [selectedProgram, setSelectedProgram] = useState(null);
-  const [exerciseLogs, setExerciseLogs] = useState({});
-  const [sessionSeconds, setSessionSeconds] = useState(0);
-  const [isSessionRunning, setIsSessionRunning] = useState(true);
+  const [activeWorkoutDraft, setActiveWorkoutDraft] = useLocalStorage(
+    "activeWorkoutDraft",
+    INITIAL_DRAFT
+  );
 
-  // Ajastin
-  useEffect(() => {
-    if (!isSessionRunning) return;
+  const { selectedProgramId, exerciseLogs, sessionSeconds, isSessionRunning } =
+    activeWorkoutDraft;
 
-    const interval = setInterval(() => {
-      setSessionSeconds((prev) => prev + 1);
-    }, 1000);
+  const selectedProgram = useMemo(
+    () => programs.find((p) => p.id === selectedProgramId) ?? null,
+    [programs, selectedProgramId]
+  );
 
-    return () => clearInterval(interval);
-  }, [isSessionRunning]);
+  const updateDraft = (changes) => {
+    setActiveWorkoutDraft((prev) => ({ ...prev, ...changes }));
+  };
 
-  // Kun ohjelma valitaan, alustetaan sarjat
-  useEffect(() => {
-    if (!selectedProgram) return;
-
+  const buildInitialExerciseLogs = (program) => {
     const logs = {};
-    selectedProgram.exercises.forEach((ex) => {
-      logs[ex.id] = Array(ex.sets).fill({ reps: ex.reps, weight: 0 });
+    program.exercises.forEach((ex) => {
+      logs[ex.id] = Array.from({ length: ex.sets }, () => ({
+        reps: ex.reps,
+        weight: 0,
+      }));
     });
-    setExerciseLogs(logs);
-  }, [selectedProgram]);
+    return logs;
+  };
+
+  const handleProgramChange = (programId) => {
+    const program = programs.find((p) => p.id === programId);
+
+    if (!program) {
+      setActiveWorkoutDraft(INITIAL_DRAFT);
+      return;
+    }
+
+    updateDraft({
+      selectedProgramId: programId,
+      exerciseLogs: buildInitialExerciseLogs(program),
+    });
+  };
 
   const handleInputChange = (exerciseId, setIndex, field, value) => {
-    setExerciseLogs((prev) => {
-      const newSets = [...prev[exerciseId]];
-      newSets[setIndex] = { ...newSets[setIndex], [field]: value };
-      return { ...prev, [exerciseId]: newSets };
+    const newSets = [...(exerciseLogs[exerciseId] ?? [])];
+    newSets[setIndex] = { ...newSets[setIndex], [field]: value };
+
+    updateDraft({
+      exerciseLogs: {
+        ...exerciseLogs,
+        [exerciseId]: newSets,
+      },
     });
   };
 
@@ -57,6 +83,7 @@ export default function WorkoutSession({ goBack }) {
     };
 
     saveSession(session);
+    setActiveWorkoutDraft(INITIAL_DRAFT);
     alert("Treenisessio tallennettu!");
     goBack();
   };
@@ -71,18 +98,22 @@ export default function WorkoutSession({ goBack }) {
 
       <WorkoutTimer
         workSeconds={sessionSeconds}
-        setWorkSeconds={setSessionSeconds}
+        setWorkSeconds={(nextSeconds) => {
+          setActiveWorkoutDraft((prev) => ({
+            ...prev,
+            sessionSeconds:
+              typeof nextSeconds === "function"
+                ? nextSeconds(prev.sessionSeconds)
+                : nextSeconds,
+          }));
+        }}
         isSessionRunning={isSessionRunning}
       />
 
       {!selectedProgram && (
         <select
           value={selectedProgramId}
-          onChange={(e) => {
-            const program = programs.find((p) => p.id === e.target.value);
-            setSelectedProgramId(e.target.value);
-            setSelectedProgram(program);
-          }}
+          onChange={(e) => handleProgramChange(e.target.value)}
         >
           <option value="">Valitse ohjelma</option>
           {programs.map((p) => (
@@ -94,13 +125,16 @@ export default function WorkoutSession({ goBack }) {
       )}
 
       {selectedProgram && (
-        <div className="selected-program-banner">🏋️ {selectedProgram.name}</div>
+        <div className="selected-program-banner">
+          🏋️ {selectedProgram.name}
+        </div>
       )}
 
       {selectedProgram &&
         selectedProgram.exercises.map((ex) => (
           <div key={ex.id} className="exercise-card">
             <h3>{ex.name}</h3>
+
             {exerciseLogs[ex.id]?.map((set, index) => (
               <div key={index} className="set-row">
                 <span>Sarja {index + 1}</span>
@@ -110,9 +144,13 @@ export default function WorkoutSession({ goBack }) {
                   <input
                     type="number"
                     value={set.reps}
-                    min={1}
                     onChange={(e) =>
-                      handleInputChange(ex.id, index, "reps", Number(e.target.value))
+                      handleInputChange(
+                        ex.id,
+                        index,
+                        "reps",
+                        Number(e.target.value)
+                      )
                     }
                   />
                 </label>
@@ -122,9 +160,13 @@ export default function WorkoutSession({ goBack }) {
                   <input
                     type="number"
                     value={set.weight}
-                    min={0}
                     onChange={(e) =>
-                      handleInputChange(ex.id, index, "weight", Number(e.target.value))
+                      handleInputChange(
+                        ex.id,
+                        index,
+                        "weight",
+                        Number(e.target.value)
+                      )
                     }
                   />
                 </label>
@@ -135,7 +177,7 @@ export default function WorkoutSession({ goBack }) {
 
       {selectedProgram && (
         <button className="button button-primary" onClick={handleSaveSession}>
-          💾 Tallenna sessio
+          💾 Tallenna treeni
         </button>
       )}
     </div>

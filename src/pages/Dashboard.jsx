@@ -133,7 +133,7 @@ export default function Dashboard({ setPage }) {
             <div key={index} className="chart-column">
               <div
                 className="chart-bar"
-                style={{ height: `${session.totalWeight * 1}px` }}
+                style={{ height: `${session.totalWeight * 0.2}px` }}
               >
                 <span className="chart-bar-value">
                   {session.totalWeight} kg
