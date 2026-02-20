@@ -1,12 +1,6 @@
-Simppeli salilla käymisen seurramis ohjelma.
-	Localstorage
-	perus salitreenit
-		mahdollisuus merkata liikkeet
-			sarjat+painot+toistot
-	todella simppeli rakenne 
-		kortit
+Simppeli salilla käymisen seurantaohjelma.
 
-
+```text
 .
 ├── public
 │   ├── image.jpg
